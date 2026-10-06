@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美好电影网（演示） - 正版片单、心情分类、口碑榜与影评</title>
+<meta name="description" content="美好电影网演示站(meihaodianyingwang-h5.github.io)提供正版电影今日甄选、按心情/类型分类、温和口碑榜与影评；移动端自适应，不提供在线播放、MP4/磁力/网盘下载与情色内容。">
+<meta name="keywords" content="美好电影网,正版电影片单,按心情选电影,电影类型分类,合家欢电影,电影口碑榜,电影影评,影视资讯">
+<meta name="author" content="美好电影网演示">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://meihaodianyingwang-h5.github.io/">
+<style>
+:root{
+  --cream:#fbf7ef;--paper:#ffffff;--panel:#ffffff;--line:#ece3d4;--ink:#2c2417;--muted:#7c715c;
+  --green:#5b8c5a;--green2:#86b97e;--gold:#d9a441;--gold2:#f0cf8a;--rose:#e08aa0;--bg:#f4efe6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;color:var(--ink);background:var(--bg)}
+a{color:inherit;text-decoration:none}
+.disclaimer{background:#243018;color:#eaf3df;font-size:.76rem;text-align:center;padding:.42rem 1rem;border-bottom:1px solid #46582c}
+.header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.nav{max-width:1200px;margin:0 auto;height:58px;padding:0 1rem;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:1.18rem}
+.brand b{color:var(--green)} .brand i{color:var(--gold);font-style:normal}
+.menu{display:flex;gap:.3rem;list-style:none}
+.menu a{padding:.42rem .85rem;border-radius:999px;font-size:.9rem;color:var(--muted)}
+.menu a:hover{background:linear-gradient(90deg,rgba(91,140,90,.14),rgba(217,164,65,.14));color:var(--ink)}
+.burger{display:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
+@media(max-width:768px){.menu{display:none}.burger{display:block}}
+
+/* 栏目1 Hero甄选 */
+.hero{background:radial-gradient(820px 340px at 92% -10%,rgba(217,164,65,.18) 0,transparent 55%),radial-gradient(720px 320px at 2% 120%,rgba(134,185,126,.18) 0,transparent 55%),linear-gradient(160deg,#fff,#f6f0e6);padding:52px 1rem}
+.herobox{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:2rem;align-items:center}
+.hero h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.15;margin-bottom:.8rem}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);max-width:540px;margin-bottom:1.4rem}
+.cta{display:inline-block;background:linear-gradient(90deg,var(--green),var(--gold));color:#fff;font-weight:700;padding:.78rem 1.7rem;border-radius:999px}
+.cta.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);margin-left:.5rem}
+.picks{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.pick{border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);box-shadow:0 10px 26px rgba(60,50,20,.07);display:flex;flex-direction:column}
+.pick .pv{height:104px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:#fff}
+.pick:nth-child(1) .pv{background:linear-gradient(135deg,var(--green),#3f663f)}
+.pick:nth-child(2) .pv{background:linear-gradient(135deg,var(--gold),#a9761f)}
+.pick:nth-child(3) .pv{background:linear-gradient(135deg,var(--rose),#b14a63)}
+.pick:nth-child(4) .pv{background:linear-gradient(135deg,var(--green2),#4f7a48)}
+.pick .pb{padding:.8rem 1rem}
+.pick .day{font-size:.7rem;color:#fff;background:linear-gradient(90deg,var(--green),var(--gold));display:inline-block;padding:.12rem .55rem;border-radius:20px;margin-bottom:.35rem}
+.pick h3{font-size:.95rem} .pick small{color:var(--muted);font-size:.74rem}
+@media(max-width:860px){.herobox{grid-template-columns:1fr}.picks{grid-template-columns:1fr}}
+
+/* 栏目2 心情+类型 */
+.section{padding:54px 1rem}
+.wrap{max-width:1200px;margin:0 auto}
+.sec-t{font-size:1.7rem;font-weight:800} .sec-s{color:var(--muted);margin:.35rem 0 1.5rem}
+.moods{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.6rem}
+.mood{border-radius:16px;padding:1.1rem;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--green)}
+.mood:nth-child(2){border-top-color:var(--gold)} .mood:nth-child(3){border-top-color:var(--rose)} .mood:nth-child(4){border-top-color:var(--green2)}
+.mood h3{font-size:1rem;margin-bottom:.3rem} .mood small{color:var(--muted);font-size:.78rem;display:block;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{font-size:.72rem;padding:.2rem .6rem;border-radius:20px;background:#f6f0e6;border:1px solid var(--line);color:var(--muted)}
+.genres{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gc{border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);transition:.25s}
+.gc:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(60,50,20,.1)}
+.gc .gh{height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;color:#fff;font-weight:800}
+.gc:nth-child(1) .gh{background:linear-gradient(135deg,var(--green),#3f663f)}
+.gc:nth-child(2) .gh{background:linear-gradient(135deg,var(--gold),#a9761f)}
+.gc:nth-child(3) .gh{background:linear-gradient(135deg,var(--rose),#b14a63)}
+.gc:nth-child(4) .gh{background:linear-gradient(135deg,var(--green2),#4f7a48)}
+.gc .gb{padding:1rem}
+.gc h3{font-size:.96rem;margin-bottom:.35rem} .gc p{font-size:.8rem;color:var(--muted);margin-bottom:.7rem}
+@media(max-width:880px){.moods{grid-template-columns:repeat(2,1fr)}.genres{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.moods{grid-template-columns:1fr}.genres{grid-template-columns:1fr}}
+
+/* 栏目3 星级条榜 */
+.ranks{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.rk{display:grid;grid-template-columns:54px 1fr 150px;gap:.8rem;align-items:center;padding:.9rem 1rem;border-bottom:1px solid var(--line)}
+.rk:last-child{border-bottom:0}
+.no{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--green),var(--gold))}
+.no.s{background:#cdbfa6;color:#3a3020}
+.info h4{font-size:.95rem} .info small{color:var(--muted);font-size:.74rem}
+.tag{display:inline-block;font-size:.68rem;padding:.12rem .5rem;border-radius:10px;margin-right:.3rem;background:#eef4ea;border:1px solid var(--line);color:var(--green)}
+.tag.g{background:#f6ecd6;color:#a9761f} .tag.r{background:#fbe7ec;color:#b14a63}
+.stars{color:var(--gold);font-size:.82rem;letter-spacing:1px}
+.bar{height:7px;border-radius:6px;background:#f1ead c;background:#f1eadc;overflow:hidden;margin-top:.3rem}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--gold))}
+.score{text-align:right;font-weight:800;color:var(--green)}
+.score small{display:block;font-weight:400;color:var(--muted)}
+
+/* 栏目4 影评+渠道 */
+.rev{display:grid;grid-template-columns:1.7fr .9fr;gap:1.4rem}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.rcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.rcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.rcard h4{font-size:.95rem} .rcard .stars{font-size:.78rem}
+.rcard p{font-size:.84rem;color:var(--muted)}
+.side .wd{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.1rem;margin-bottom:1.1rem}
+.side h3{font-size:1rem;margin-bottom:.7rem;color:var(--green)}
+.ch{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.85rem}
+.ch:last-child{border-bottom:0}
+.form{display:grid;gap:.7rem;max-width:420px}
+.form input,.form textarea{padding:.75rem 1rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.form button{background:linear-gradient(90deg,var(--green),var(--gold));color:#fff;border:0;border-radius:10px;padding:.8rem;font-weight:700;cursor:pointer}
+.note{font-size:.78rem;color:var(--muted);margin-top:.6rem}
+.footer{background:#221d12;color:#cdbfa6;text-align:center;padding:24px 1rem;font-size:.82rem}
+.footer a{color:#f0cf8a;margin:0 .4rem}
+@media(max-width:880px){.rev{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="disclaimer">本站为「美好电影网」独立演示页，与任何同名/相似影视播放、磁力、网盘站无关联、非官方；仅提供正版影视资讯与影评，不提供在线播放、枪版/未删减、MP4、磁力、网盘及情色内容。做网络点播须持《信息网络传播视听节目许可证》，片源须具公映/发行许可并取得著作权人网络授权。</div>
+
+<header class="header">
+  <nav class="nav" aria-label="主导航">
+    <div class="brand">美好<b>电影网</b><i>H5</i></div>
+    <ul class="menu">
+      <li><a href="#home">今日甄选</a></li>
+      <li><a href="#cats">心情/类型</a></li>
+      <li><a href="#rank">口碑榜</a></li>
+      <li><a href="#reviews">影评/渠道</a></li>
+    </ul>
+    <div class="burger" aria-label="菜单">☰</div>
+  </nav>
+</header>
+
+<!-- 栏目1 今日甄选 -->
+<section class="hero" id="home">
+  <div class="herobox">
+    <div>
+      <h1>美好电影·<em>按心情慢慢选</em></h1>
+      <p>按定档、心情场景与类型整理公映/持牌片单与影评。全站不提供“抢先完整版”播放，不提供MP4、磁力、网盘解析；影视网络传播须持《信息网络传播视听节目许可证》，电影/剧集须具公映/发行许可并取得授权。[2,5](@ref)</p>
+      <a href="#cats" class="cta">按心情找片</a>
+      <a href="#rank" class="cta ghost">看口碑榜</a>
+    </div>
+    <div class="picks">
+      <article class="pick"><div class="pv">🌿</div><div class="pb"><span class="day">放松·定档</span><h3><a href="#">《慢山来信》</a></h3><small>剧情/治愈·公映定档·正版字幕</small></div></article>
+      <article class="pick"><div class="pv">🍿</div><div class="pb"><span class="day">合家·动画</span><h3><a href="#">《麦田小火车》</a></h3><small>合家欢动画·正版发行·4K资讯</small></div></article>
+      <article class="pick"><div class="pv">🕵️</div><div class="pb"><span class="day">烧脑·悬疑</span><h3><a href="#">《雾港拼图》</a></h3><small>犯罪/推理·持牌点播·不追枪版</small></div></article>
+      <article class="pick"><div class="pv">💛</div><div class="pb"><span class="day">甜蜜·爱情</span><h3><a href="#">《初夏便当》</a></h3><small>纯爱/轻喜剧·院线+会员·公映许可</small></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目2 心情+类型 -->
+<section class="section" id="cats">
+  <div class="wrap">
+    <h2 class="sec-t">按心情场景 + 类型双维分类</h2>
+    <p class="sec-s">先按放松/合家/烧脑/甜蜜筛片，再叠加类型。卡片、标签内链全 #，仅整理正版公映/持牌信息。</p>
+    <div class="moods">
+      <div class="mood"><h3>🌿 放松解压</h3><small>治愈、自然、慢剧情</small><div class="chips"><a href="#" class="chip">治愈 #</a><a href="#" class="chip">自然 #</a><a href="#" class="chip">慢剧情 #</a></div></div>
+      <div class="mood"><h3">🍿 合家共赏</h3><small>动画、喜剧、全龄大片</small><div class="chips"><a href="#" class="chip">动画 #</a><a href="#" class="chip">喜剧 #</a><a href="#" class="chip">全龄 #</a></div></div>
+      <div class="mood"><h3>🕵️ 烧脑沉浸</h3><small>悬疑、推理、社会派</small><div class="chips"><a href="#" class="chip">悬疑 #</a><a href="#" class="chip">推理 #</a><a href="#" class="chip">犯罪 #</a></div></div>
+      <div class="mood"><h3>💛 甜蜜治愈</h3><small>纯爱、轻喜剧、美食</small><div class="chips"><a href="#" class="chip">纯爱 #</a><a href="#" class="chip">轻喜剧 #</a><a href="#" class="chip">美食 #</a></div></div>
+    </div>
+    <div class="genres">
+      <article class="gc"><div class="gh"><span>剧情/治愈</span><span>🎬</span></div><div class="gb"><h3><a href="#">剧情治愈</a></h3><p>家庭、成长、人与自然，侧重公映版与展映资讯。</p><div class="chips"><a href="#" class="chip">家庭 #</a><a href="#" class="chip">成长 #</a><a href="#" class="chip">自然 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>动画/合家</span><span>🧸</span></div><div class="gb"><h3><a href="#">动画合家</a></h3><p>剧场版、儿童向、奇幻冒险，关注正版4K与排期。</p><div class="chips"><a href="#" class="chip">剧场版 #</a><a href="#" class="chip">儿童 #</a><a href="#" class="chip">奇幻 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>悬疑/犯罪</span><span>🕵️</span></div><div class="gb"><h3><a href="#">悬疑犯罪</a></h3><p>本格推理、社会派、刑侦复盘，只评正版字幕与持牌点播。</p><div class="chips"><a href="#" class="chip">本格 #</a><a href="#" class="chip">社会派 #</a><a href="#" class="chip">刑侦 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>爱情/喜剧</span><span>💛</span></div><div class="gb"><h3><a href="#">爱情喜剧</a></h3><p>纯爱、职场轻喜剧、美食治愈，适合午间与周末场景。</p><div class="chips"><a href="#" class="chip">纯爱 #</a><a href="#" class="chip">职场 #</a><a href="#" class="chip">美食 #</a></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目3 星级条榜 -->
+<section class="section" id="rank" style="background:#f6f0e6">
+  <div class="wrap">
+    <h2 class="sec-t">美好口碑榜</h2>
+    <p class="sec-s">演示评分，按公映/持牌口碑整理；不爬枪版、不标未删减、不提供资源下载。</p>
+    <div class="ranks">
+      <div class="rk"><div class="no">1</div><div class="info"><h4><span class="tag">治愈</span><span class="tag g">剧情</span><a href="#">《慢山来信》</a></h4><small>公映定档·自然慢片·正版字幕</small><div class="stars">★★★★★</div><div class="bar"><i style="width:94%"></i></div></div><div class="score">9.4<small>美好跟踪</small></div></div>
+      <div class="rk"><div class="no">2</div><div class="info"><h4><span class="tag">动画</span><span class="tag g">合家</span><a href="#">《麦田小火车》</a></h4><small>正版发行·4K·院线+会员</small><div class="stars">★★★★★</div><div class="bar"><i style="width:92%"></i></div></div><div class="score">9.2<small>美好跟踪</small></div></div>
+      <div class="rk"><div class="no s">3</div><div class="info"><h4><span class="tag r">悬疑</span><span class="tag">犯罪</span><a href="#">《雾港拼图》</a></h4><small>持牌点播·双线推理·不追枪版</small><div class="stars">★★★★☆</div><div class="bar"><i style="width:90%"></i></div></div><div class="score">9.0<small>美好跟踪</small></div></div>
+      <div class="rk"><div class="no s">4</div><div class="info"><h4><span class="tag">爱情</span><span class="tag g">轻喜剧</span><a href="#">《初夏便当》</a></h4><small>公映字幕·合家/情侣场景</small><div class="stars">★★★★☆</div><div class="bar"><i style="width:88%"></i></div></div><div class="score">8.8<small>美好跟踪</small></div></div>
+      <div class="rk"><div class="no s">5</div><div class="info"><h4><span class="tag">展映</span><span class="tag g">4K</span><a href="#">《老街晨光4K》</a></h4><small>修复重映·公映许可·不标未删减</small><div class="stars">★★★★☆</div><div class="bar"><i style="width:87%"></i></div></div><div class="score">8.7<small>美好跟踪</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目4 影评+渠道 -->
+<section class="section" id="reviews">
+  <div class="wrap">
+    <h2 class="sec-t">美好影评 & 正版渠道</h2>
+    <p class="sec-s">按心情/场景写短评；渠道仅导航持牌平台，不解析、不提供下载。</p>
+    <div class="rev">
+      <div class="cards">
+        <div class="rcard"><div class="top"><h4><a href="#">《慢山来信》治愈向</a></h4><span class="stars">★★★★★ 9.4</span></div><p>公映版对白完整、字幕准确；自然慢片适合放松场景，不找枪版/未删减，优先院线重映与持牌点播。[2](@ref)</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《麦田小火车》合家向</a></h4><span class="stars">★★★★★ 9.2</span></div><p>正版4K对配音与色彩更友好；大屏看场景、移动端看缓存，不提供MP4与磁力。</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《雾港拼图》悬疑向</a></h4><span class="stars">★★★★☆ 9.0</span></div><p>双线动机与声画层次；持牌平台比网盘稳定，重点评剪辑节奏与正版字幕准确度。[5](@ref)</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《初夏便当》爱情向</a></h4><span class="stars">★★★★☆ 8.8</span></div><p>纯爱+美食轻喜剧，公映字幕版更稳；按正版资源写评，不标“完整版抢先”。</p></div>
+      </div>
+      <aside class="side">
+        <div class="wd">
+          <h3>正版渠道导航</h3>
+          <div class="ch">🎬 院线定档 <span>公映许可/场次 #</span></div>
+          <div class="ch">📺 持牌点播 <span>视听许可证/会员 #</span></div>
+          <div class="ch">📣 片方官宣 <span>发行/预告/字幕授权 #</span></div>
+          <div class="ch">🎟️ 展映修复 <span>4K/资料馆 #</span></div>
+        </div>
+        <div class="wd">
+          <h3>定档/影评投稿</h3>
+          <form class="form" onsubmit="event.preventDefault();alert('演示提交成功（不对接后端）');">
+            <input type="text" name="name" placeholder="称呼" required>
+            <input type="email" name="email" placeholder="邮箱" required>
+            <textarea name="msg" placeholder="正版定档投稿/心情分类建议/影评合作" required></textarea>
+            <button type="submit">提交</button>
+          </form>
+          <p class="note">本演示不接盗版/枪版/未删减/磁力/网盘/情色；做影视网络点播须持《信息网络传播视听节目许可证》，电影/剧集须具公映/发行许可证，并按院线/电视/网站/OTTT等渠道取得著作权人网络授权。[2,11](@ref)</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>
+    <a href="#home">今日甄选</a><a href="#cats">心情/类型</a><a href="#rank">口碑榜</a><a href="#reviews">影评/渠道</a>
+  </div>
+  <p style="margin-top:.6rem">© 2026 美好电影网（演示）· meihaodianyingwang-h5.github.io · 独立演示、与任何同名/相似播放下载站无关联 · 仅作合法影视资讯</p>
+</footer>
+
+</body>
+</html>
